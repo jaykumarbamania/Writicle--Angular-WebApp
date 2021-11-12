@@ -1,0 +1,113 @@
+<div id="container">
+    <img src="images/logo/writiclelogo.PNG" alt="Writicle Logo">
+    <h1>Sign Up</h1>
+    <p>Already have an account? <a href="login.html" class="link">Sign In</a></p>
+    <div id="tableBorder">
+        <form method="post" action="home.html" [formGroup]="registerForm" id="signupForm" (submit)="registerFunction()">
+            <span id="formError"></span>
+            <table>
+                <tr>
+                    <th><label for="fname" id="fnamelabel">Name : </label></th>
+                    <td><input type="text" formControlName="name" id="fname"/>
+                        <div [ngClass]="myColor" *ngIf="getName.invalid && getName.touched">
+                            <span *ngIf="getName.errors.required; else nameElse">
+                                <b >This field is required</b>
+                            </span>
+                            <ng-template #nameElse>
+                                <span *ngIf="getName.errors.pattern">
+                                    <b>Name should have only Alphabets</b>
+                                </span>
+                            </ng-template>
+                            
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="email" id="emaillabel">Email </label></th>
+                    <td><input type="email" formControlName="email" id="email"  />
+                        <div [ngClass]="{myColor: true}" *ngIf="getEmail.invalid && getEmail.touched">
+                            <span *ngIf="getEmail.errors.required; else emailElse">
+                                <b >This field is required</b>
+                            </span>
+                            <ng-template #emailElse>
+                                <span *ngIf="getEmail.errors.email">
+                                    <b>Invalid Email</b>
+                                </span>
+                            </ng-template>
+                            
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="phoneno" id="phonelabel">Phone No. : </label></th>
+                    <td><input type="text" formControlName="mobileNum" id="mobileNum"  />
+                        <div [ngClass]="{myColor: true}" *ngIf="getMobile.invalid && getMobile.touched">
+                            <span *ngIf="getMobile.errors.required, else mobileElse1">
+                                <b >This field is required</b>
+                            </span>
+                            <ng-template #mobileElse1>
+                                <span *ngIf="getMobile.errors.pattern; else mobileElse2">
+                                    <b>Only digits are allowed</b>
+                                </span>
+                            </ng-template>
+                            <ng-template #mobileElse2>
+                                <span *ngIf="getMobile.errors.minlength || getMobile.errors.maxlength">
+                                    <b>Mobile no are of 10-11 digits allowed</b>
+                                </span>
+                            </ng-template>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="age" id="agelabel">Age : </label></th>
+                    <td><input type="number" formControlName="age" id="age"  />
+                        <div [ngClass]="{myColor: true}" *ngIf="getAge.invalid && getAge.touched">
+                            <span *ngIf="getAge.errors.required, else ageElse">
+                                <b >This field is required</b>
+                            </span>
+                            <ng-template #ageElse>
+                                <span *ngIf="getAge.errors.min || getAge.errors.max">
+                                    <b>Age Should be in the range of 1 - 100</b>
+                                </span>
+                            </ng-template>
+                            
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="password" id="passlabel">Password : </label></th>
+                    <td><input type="password" formControlName="password" id="password"  />
+                        <div [ngClass]="{myColor: true}" *ngIf="getPass.invalid && getPass.touched">
+                            <span *ngIf="getPass.errors.required; else passElse">
+                                <b >This field is required</b>
+                            </span>
+                            <ng-template #passElse>
+                                <span *ngIf="getPass.errors.pattern">
+                                    <b>Password must be atleast 8chars, include atleast 1 digit,1 special char</b>
+                                </span>
+                            </ng-template>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="cpassword" id="cpasslabel">Confirm Password : </label></th>
+                    <td><input type="password" formControlName="cpassword" id="cpassword" />
+                        <div [ngClass]="{myColor: true}" *ngIf="getCPass.invalid && getCPass.touched">
+                            <span *ngIf="getCPass.errors.required">
+                                <b >This field is required</b>
+                            </span>
+                        </div>
+                        <div [ngClass]="{myColor: true}" *ngIf="getCPass.touched && registerForm.errors?.passMismatch">
+                           
+                                <b >Both password should match!</b>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="submit" id="subButton" [disabled]="registerForm.invalid">Register</button></td>
+                    <!-- <td colspan="2"><input type="submit" Value="Register" id="subButton"></td> -->
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
