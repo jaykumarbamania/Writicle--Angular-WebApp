@@ -4,17 +4,19 @@
         <div class="tabList">
             <div class="leftTabs">
             
-                <a [routerLink]="['']" routerLinkActive="active" >Home</a>
-                <a href="about">About</a>
-                <a href="contact.html">Contact</a>
+                <a [routerLink]="['feeds']" routerLinkActive="active" >Home</a>
+                <a [routerLink]="['about']" routerLinkActive="active" >About</a>
+                <a [routerLink]="['contact']" routerLinkActive="active" >Contact</a>
             
             </div>
-            <div class="rightTabs">
                
-                <a [routerLink]="['login']" routerLinkActive="active" >Login</a>
+                <div class="rightTabs" *ngIf="!isLogineed">
+                    <a [routerLink]="['login']" routerLinkActive="active" >Login</a>
                 <a [routerLink]="['register']" routerLinkActive="active"  >Register</a>
-            
-            </div>
+                </div>
+                <div class="rightTabs" *ngIf="isLogineed">
+                    <a [routerLink]="['/logout']"  >Logout</a>
+                </div>
         </div>
     </nav>
 </div>

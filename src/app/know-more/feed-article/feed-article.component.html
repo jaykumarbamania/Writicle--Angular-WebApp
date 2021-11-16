@@ -1,0 +1,30 @@
+<article >
+    <div class="btnsDiv">
+        <button class="btns" (click)="gotoHome()">Back</button>
+        <!-- <div>
+            <button class="btns" (click)="goPrevious()"> < </button>
+            <button class="btns" (click)="goNext()"> > </button>
+        </div> -->
+    </div>
+    <header >
+        <h1 class="headerText">{{feed.headLines}}</h1>
+        <p class="editedBy">Posted : <b>{{feed.postedAt}}</b></p>
+    </header>
+    <section class="articleSection"> 
+        <p>{{feed.highLights}}</p>
+        <div class="mainSection">
+            <div class="leftSideArticle">
+                <img class="articleImage" [src]="feed.feedImage" alt="Loading Image">
+                <small>
+                    {{feed.headLines}}
+                </small>
+            </div>
+            <div class="rightSideArticle">
+                <p>{{feed.para1}}</p>
+                <p>{{feed.para2}}</p>
+                <p>{{feed.para3}}</p>
+                <p>{{feed.para4}}</p>
+            </div>
+        </div>
+    </section>
+</article>

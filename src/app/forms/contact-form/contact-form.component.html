@@ -1,0 +1,23 @@
+<form class="contactForm" method="post" onsubmit="return contactForm()">
+    <table >
+        <tr>
+            <th><label for="contactname" id="contactnamelabel">Name : </label></th>
+            <td><input type="text" name="name" id="contactname" onblur="contactnameVal()" /><span id="contactnameError"></span></td>
+        </tr>
+        <tr>
+            <th><label for="email" id="emaillabel">Email </label></th>
+            <td><input type="email" name="email" id="email" onblur="emailVal()" /><span id="emailError"></span></td>
+        </tr>
+        <tr>
+            <th><label for="phoneno" id="phonelabel">Phone No. : </label></th>
+            <td><input type="text" name="phone" id="phoneno" onblur="phoneVal()" /><span id="phoneError"></span></td>
+        </tr>
+        <tr>
+            <th><label for="message" id="messagelabel">Message : </label></th>
+            <td><textarea  name="message" id="message" onblur="messageVal()" ></textarea><span id="messageError"></span></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit" id="subButton">Submit</button></td>
+        </tr>
+    </table>
+</form>

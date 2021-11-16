@@ -1,0 +1,11 @@
+<h3>Also Read some latest</h3>
+<div class="samewebArticle" *ngFor="let feeds of asideFeeds">
+    
+    <div class="oneFeed" *ngFor="let feed of feeds.feedCard">
+        <div class="imageAside"><img [src]="feed.feedImage" alt=""></div>
+        <div class="asideSection">
+            <a [routerLink]="['../',feed.feedId]"  >{{(feed.headLines.length>94) ? (feed.headLines | slice:0:94)+'...'  :(feed.headLines) }}</a>
+            <p class="editBy">{{ feed.postedAt}}</p>
+        </div>
+    </div>
+</div>

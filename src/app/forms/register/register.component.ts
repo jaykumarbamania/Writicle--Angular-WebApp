@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -16,16 +18,19 @@ export class RegisterComponent implements OnInit {
   cpassword:string = "";
   
   registerForm:FormGroup= new FormGroup({});
-  constructor() { }
+  constructor(
+    private registerService:LoginService,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
     this.registerForm=new FormGroup({
       name:new FormControl("Jay",[Validators.required,Validators.pattern("^[A-Za-z]+$")]),
-      age:new FormControl(0,[Validators.required,Validators.min(1),Validators.max(100)]),
-      mobileNum:new FormControl("98989898",[Validators.required,Validators.minLength(10),Validators.maxLength(11),Validators.pattern("^[0-9]*$")]),
+      age:new FormControl(21,[Validators.required,Validators.min(1),Validators.max(100)]),
+      mobileNum:new FormControl("9898989898",[Validators.required,Validators.minLength(10),Validators.maxLength(11),Validators.pattern("^[0-9]*$")]),
       email:new FormControl("jay@gmail.com",[Validators.required,Validators.email]),
-      password:new FormControl("J@ykumar99",[Validators.required,Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$')]),
-      cpassword:new FormControl("J@y",Validators.required)
+      password:new FormControl("Jay@161199",[Validators.required,Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{6,12}$')]),
+      cpassword:new FormControl("Jay@161199",[Validators.required])
     },
     {
       validators:this.matchPassword
@@ -33,16 +38,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  registerFunction():void{
-    console.log(this.registerForm.value);
-    console.log(this.registerForm.get("name")?.value);
-    console.log(this.registerForm.get("age")?.value);
-    console.log(this.registerForm.get("mobileNum")?.value);
-    console.log(this.registerForm.get("email")?.value);
-    console.log(this.registerForm.get("userName")?.value);
-    console.log(this.registerForm.get("password")?.value);
-    console.log(this.registerForm.get("cpassword")?.value);
-  }
+
 
   get getName(){
     return this.registerForm.get("name");
@@ -60,10 +56,6 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get("email");
   }
 
-  get getUserName(){
-    return this.registerForm.get("userName");
-  }
-
   get getPass(){
     return this.registerForm.get("password");
   }
@@ -72,14 +64,36 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get("cpassword");
   }
 
-  private matchPassword(form:FormGroup):null|{}{
-    let pass = form.get("password")!;
-    let cpass = form.get("cpassword")!;
-    if(pass.value == cpass.value)
-      return null;
-    else 
-      return {passMismatch:true}
+  
+  registerFunction():void{
+  //  this.name = this.registerForm.value;
+   this.age = this.registerForm.get("age")?.value;
+   this.mobileNum = this.registerForm.get("mobileNum")?.value;
+   this.email = this.registerForm.get("email")?.value;
+   this.name = this.registerForm.get("name")?.value;
+   this.password = this.registerForm.get("password")?.value;
+
+   this.registerService.registerUser(this.name,this.password,this.email,this.mobileNum.toString(),this.age);
+   this.router.navigate(['/login'])
   }
+
+  // private matchPassword(form:FormGroup):null|{}{
+  //   let pass = form.get("password")!;
+  //   let cpass = form.get("cpassword")!;
+  //   if(pass.value == cpass.value)
+  //     return null;
+  //   else 
+  //     return {passMismatch:true}
+  // }
+
+  private matchPassword(regForm:FormGroup):null|{}{//null or object
+    let passControl = regForm.get("password");
+    let confirmPassControl = regForm.get("cpassword");
+    if(passControl.value == confirmPassControl.value)
+      return null;//validation passed
+    else
+      return {passMissMatch:true};//validation failed
+    }
 
 } 
 

@@ -10,6 +10,15 @@ import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './forms/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { ContactComponent } from './contact/contact.component';
+import { ContactFormComponent } from './forms/contact-form/contact-form.component';
+import { AboutComponent } from './about/about.component';
+import { KnowMoreComponent } from './know-more/know-more.component';
+import { FeedsService } from './services/feeds.service';
+import { FeedArticleComponent } from './know-more/feed-article/feed-article.component';
+import { OrderModule } from 'ngx-order-pipe';
+import { LogoutComponent } from './logout/logout.component';
+import { AsideArticlesComponent } from './know-more/aside-articles/aside-articles.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +27,25 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     FooterComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ContactComponent,
+    ContactFormComponent,
+    AboutComponent,
+    KnowMoreComponent,
+    FeedArticleComponent,
+    LogoutComponent,
+    AsideArticlesComponent
   ],
   imports: [
+    OrderModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
-  providers: [HttpClient],
+  providers: [HttpClient,FeedsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

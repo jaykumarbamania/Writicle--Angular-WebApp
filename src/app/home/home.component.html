@@ -3,22 +3,22 @@
 <div *ngFor="let newsFeed of feeds">
     <h1>Date : {{newsFeed.feedDate}} Articles</h1>
     <div class="feedList">
-        <div class="card" *ngFor="let feed of newsFeed.feedCard">
-            <a href="knowmore.html"><img [src]="feed.feedImage" alt="Loading Image" style="width:100%"></a>
+        <div class="card" *ngFor="let feed of newsFeed.feedCard | orderBy :newsFeed.feedCard.feedId " [class.selected]="isSelected(feed)">
+            <a (click)="onSelect(feed)"><img [src]="feed.feedImage" alt="Loading Image" style="width:100%"></a>
             <div class="aboutfeed">
-                <h3><a href="knowmore.html"><p class="headlines">{{feed.headLines}}</p></a></h3>
+                <h3><a (click)="onSelect(feed)"><p class="headlines">{{(feed.headLines.length>94) ? (feed.headLines | slice:0:94)+'...'  :(feed.headLines) }}</p></a></h3>
                 <p class="editedBy">Posted : <b>{{feed.postedAt}}</b></p>
-                <p class="highlights">{{feed.highLights}}</p>
+                <p class="highlights">{{(feed.highLights.length >150 )?  (feed.highLights | slice:0:150)+'...':(feed.highLights)}}</p>
             </div>
             <div class="actionSection">
-                <i class="fa fa-thumbs-o-up icons"  aria-hidden="true" id="like1" onclick="likedFunction('like1')" onmouseover="likeIcon('like1')" onmouseleave="unlikeIcon('like1')"> {{feed.likes}}</i>
-                <a href="knowmore.html"><button type="submit">Know More</button></a>
-                <i class="fa fa-bookmark-o icons" aria-hidden="true" id="saved1" onclick="savedFunction('saved1')" onmouseover="savedIcon('saved1')" onmouseleave="unsavedIcon('saved1')"></i>
+                <i class="fa fa-thumbs-o-up icons"  aria-hidden="true" id="like1" onclick="onLike('like1')" onmouseover="likeIcon('like1')" onmouseleave="unlikeIcon('like1')"> {{feed.likes}}</i>
+                <a ><button type="submit" (click)="onSelect(feed)">Know More</button></a>
+                <input (click) ="onBookMark($event,feed.feedId)"  [class]="bookMarkClass" type="checkbox">
             </div>
         </div>
     </div>
 </div>
-
+<!-- 
 <h1>Date : 19 Sep 2021 Articles</h1>
 <div class="feedList">
     
@@ -132,4 +132,4 @@
             <i class="fa fa-bookmark-o icons" aria-hidden="true" id="saved4" onclick="savedFunction('saved4')" onmouseover="savedIcon('saved4')" onmouseleave="unsavedIcon('saved4')"></i>
         </div>
 
-</div>
+</div> -->

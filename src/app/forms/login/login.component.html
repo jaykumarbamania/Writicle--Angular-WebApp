@@ -1,18 +1,37 @@
 <div id="container">
-    <img src="images/logo/writiclelogo.PNG" alt="Writicle Logo">
+    <img src="assets/images/writiclelogo.PNG" alt="Writicle Logo">
     <h1>Sign In</h1>
     <p>Don't have an account? <a href="register.html" class="link">Sign Up</a> </p>
     <div id="tableBorder">
-        <form action="home.html" onsubmit="return loginForm()" method="post">
-            <figcaption id="formError"></figcaption>
+        <form  [formGroup] = "loginForm" (submit)="loginFunction()" method="post">
             <table>
                 <tr>
-                    <th><label for="loginemail" id="loginemaillabel">Email </label></th>
-                    <td><input type="text" name="loginemail" id="loginemail" onblur="loginemailVal()" /><span id="loginemailError"></span></td>
+                    <th><label for="loginemail" id="loginemaillabel">Username </label></th>
+                    <td>
+                        <input class="form-control" id="username" type="text" formControlName="username">
+                        <div [ngClass]="{myColor: true}" *ngIf="getUserName.invalid && getUserName.touched">
+                            <span *ngIf="getUserName.errors.required">
+                                <b >This field is required</b>
+                            </span>
+                            <!-- <ng-template #nameElse>
+                                <span *ngIf="getUserName.errors.pattern">
+                                    <b>Name should have only Alphabets</b>
+                                </span>
+                            </ng-template> -->
+                            
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th><label for="lpassword" id="lpasslabel">Password : </label></th>
-                    <td><input type="password" name="lpassword" id="lpassword"  onblur="lpassVal()"/><span id="lpassError"></span></td>
+                    <td>
+                        <input class="form-control" id="password" type="password" formControlName="password" >
+                            <div [ngClass]="{myColor: true}" *ngIf="getPass.invalid && getPass.touched">
+                                <span *ngIf="getPass.errors.required">
+                                    <b >This field is required</b>
+                                </span>
+                            </div>
+                    </td>
                 </tr>
                 <tr>
                     <!-- <td colspan="2"><input type="submit" Value="Login" id="subButton"></td> -->
